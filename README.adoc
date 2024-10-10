@@ -1,0 +1,92 @@
+Kitchensink Spring Boot Application
+Overview
+This is a Member Management application built using Spring Boot. The application allows for managing member registrations with features such as creating, retrieving, and validating member information. It employs RESTful APIs for interaction with the client.
+
+Features
+Member Registration: Allows users to register new members.
+Member Lookup: Retrieve member details by ID or email.
+Validation: Ensures all member data adheres to specified constraints.
+Database Integration: Utilizes JPA for database interactions.
+Prerequisites
+Before you begin, ensure you have met the following requirements:
+
+Java 11 or higher
+Maven (for dependency management)
+Spring Boot (included in the project)
+Installation
+Clone the Repository:
+
+bash
+Copy code
+git clone https://github.com/yourusername/member-management.git
+cd member-management
+Build the Project:
+
+bash
+Copy code
+./mvnw clean install
+Configuration: Update the database connection settings in src/main/resources/application.properties or src/main/resources/application.yml as needed.
+
+Running the Application
+You can run the application using the following command:
+
+bash
+Copy code
+./mvnw spring-boot:run
+Alternatively, you can run the built jar file:
+
+bash
+Copy code
+java -jar target/member-management-0.0.1-SNAPSHOT.jar
+API Endpoints
+The application exposes the following RESTful API endpoints:
+
+GET /members/: Retrieve a list of all members.
+GET /members/{id}: Retrieve a specific member by their ID.
+POST /members/createMember: Create a new member.
+Sample Requests
+Get All Members:
+
+http
+Copy code
+GET /members/
+Get Member by ID:
+
+http
+Copy code
+GET /members/1
+Create Member:
+
+http
+Copy code
+POST /members/createMember
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phoneNumber": "1234567890"
+}
+Testing
+You can run the test cases using the following command:
+
+bash
+Copy code
+./mvnw test
+Contributing
+Contributions are welcome! Please follow these steps:
+
+Fork the repository.
+Create your feature branch:
+bash
+Copy code
+git checkout -b feature/YourFeature
+Commit your changes:
+bash
+Copy code
+git commit -m "Add some feature"
+Push to the branch:
+bash
+Copy code
+git push origin feature/YourFeature
+Open a pull request.
