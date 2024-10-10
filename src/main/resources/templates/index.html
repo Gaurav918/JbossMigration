@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome to JBoss!</title>
+</head>
+<body>
+
+<!-- Welcome Message -->
+<h1>Welcome to JBoss!</h1>
+<div>
+    <p>You have successfully deployed a Jakarta EE Enterprise Application.</p>
+</div>
+
+<!-- Member Registration Form -->
+<form th:action="@{/register}" th:object="${newMember}" method="post">
+    <h2>Member Registration</h2>
+    <p>Enforces annotation-based constraints defined on the model class.</p>
+
+    <table>
+        <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input type="text" id="name" th:field="*{name}" /></td>
+            <td><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid"></span></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="text" id="email" th:field="*{email}" /></td>
+            <td><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid"></span></td>
+        </tr>
+        <tr>
+            <td><label for="phoneNumber">Phone #:</label></td>
+            <td><input type="text" id="phoneNumber" th:field="*{phoneNumber}" /></td>
+            <td><span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid"></span></td>
+        </tr>
+    </table>
+
+    <!-- Submit Button -->
+    <div>
+        <button type="submit">Register</button>
+    </div>
+
+    <!-- Global Messages -->
+    <div th:if="${#fields.hasGlobalErrors()}" class="messages">
+        <span th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="invalid"></span>
+    </div>
+</form>
+
+<!-- Display List of Members -->
+<h2>Members</h2>
+<div th:if="${#lists.isEmpty(members)}">
+    <em>No registered members.</em>
+</div>
+<table th:if="${!#lists.isEmpty(members)}" class="simpletablestyle">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone #</th>
+        <th>REST URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="member : ${members}">
+        <td th:text="${member.id}"></td>
+        <td th:text="${member.name}"></td>
+        <td th:text="${member.email}"></td>
+        <td th:text="${member.phoneNumber}"></td>
+        <td><a th:href="@{/members/{id}(id=${member.id})}">/members/{id}</a></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="5">REST URL for all members: <a th:href="@{/members/}">/members</a></td>
+    </tr>
+    </tfoot>
+</table>
+
+</body>
+</html>
